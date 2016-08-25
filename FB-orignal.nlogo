@@ -139,18 +139,9 @@ to find-firm
     set counter-parent counter-parent + 1
   ]
 
-  cf:case [ p-of-home-firm <= p-of-other-firm and tech-relatedness?] [
-    let other-firms [other firms] of parent-firm
-    let best-firm-match max-one-of other-firms [weight * firm-size] ;;  lottery rnd extension max one of
-    if best-firm-match != nobody [
-    create-link-with best-firm-match
-    set changed-job-counter changed-job-counter + 1
-    ]
-  ]
-
   cf:case [ p-of-home-firm <= p-of-other-firm ] [
     let other-firms [other firms] of parent-firm
-    let best-firm-match max-one-of other-firms [firm-size]
+    let best-firm-match max-one-of other-firms [(ifelse-value (tech-relatedness?) [weight] [1]) * firm-size]
     if best-firm-match != nobody [
     create-link-with best-firm-match
     set changed-job-counter changed-job-counter + 1
@@ -181,16 +172,7 @@ to find-city
 
   cf:case [ p-of-home-city <= p-of-other-city ] [
     let other-cities [other cities] of parent-city
-    let best-city-match max-one-of other-cities [city-size] ;min-one-of other-cities [(1 - (weight / p-of-radical-innovation )) * city-size] ;
-    if best-city-match != nobody [
-    create-link-with best-city-match
-    set left-city-counter left-city-counter + 1
-    ]
-  ]
-
-  cf:case [ p-of-home-city <= p-of-other-city and tech-relatedness?] [
-    let other-cities [other firms] of parent-firm
-    let best-city-match max-one-of other-cities [(weight / product-space-size ) * city-size]
+    let best-city-match max-one-of other-cities [(ifelse-value (tech-relatedness?) [weight] [1]) * city-size] ;min-one-of other-cities [(1 - (weight / p-of-radical-innovation )) * city-size] ;
     if best-city-match != nobody [
     create-link-with best-city-match
     set left-city-counter left-city-counter + 1
