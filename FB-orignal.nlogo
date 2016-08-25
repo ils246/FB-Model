@@ -407,21 +407,6 @@ p-of-parent-city
 %
 HORIZONTAL
 
-SLIDER
-35
-452
-242
-485
-tech-relatedness-tolerance
-tech-relatedness-tolerance
-0
-400
-400
-10
-1
-NIL
-HORIZONTAL
-
 BUTTON
 35
 20
