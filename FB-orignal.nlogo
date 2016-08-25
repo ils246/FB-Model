@@ -33,7 +33,7 @@ to setup
   ]
 
   create-firms initial-firms [         ;; creates firms
-    setup-new-city
+    setup-new-firm
   ]
 
   create-cities initial-cities [       ;; creates firms
