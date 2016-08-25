@@ -75,7 +75,7 @@ to go
 
       set parent-city [one-of link-neighbors with [ breed = cities]] of myself
       set parent-firm [one-of link-neighbors with [ breed = firms]] of myself
-      set t-index random-normal [t-index] of myself p-of-radical-innovation
+      set t-index ((random-normal [t-index] of myself p-of-radical-innovation) mod product-space-size)
 
       find-firm
       find-city
@@ -226,8 +226,18 @@ to update-positions
   arrange-in-column cities  -15
 end
 
+;Jason and me - Aug.24.16
+; to compute weight we subtract my t-index from every other firms' t-index not including my parent firm. I want to minimize the technological distance, therefore I take the absolute value, however,
+; because t-index is one value and it needs to wrap around so the distance between the min and the max has to be the same as max and max - 1,
+; we try all three of the following cases:
+;  * add 0 (which will be optimal when the two numbers are already near one another)
+;  * add -p (which will be optimal when the comparer's t-index is low and the comparee's t-index is high)
+;  * add p (which will be optimal when the comparer's t-index is high and the comparee's t-index is low)
+
+
+
 to-report weight
- report  min map [ abs (t-index - ([t-index] of myself + ? )) ]  (list 0 (- p-of-radical-innovation) p-of-radical-innovation)
+ report  min map [ abs (t-index - ([t-index] of myself + ? )) ]  (list 0 (- product-space-size) product-space-size)
 end
 @#$#@#$#@
 GRAPHICS-WINDOW
@@ -545,6 +555,17 @@ tech-relatedness?
 0
 1
 -1000
+
+MONITOR
+1127
+437
+1275
+482
+NIL
+max [t-index] of pd-s
+17
+1
+11
 
 @#$#@#$#@
 ## WHAT IS IT?
