@@ -556,17 +556,6 @@ tech-relatedness?
 1
 -1000
 
-MONITOR
-1127
-437
-1275
-482
-NIL
-max [t-index] of pd-s
-17
-1
-11
-
 @#$#@#$#@
 ## WHAT IS IT?
 
