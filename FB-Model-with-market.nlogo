@@ -117,8 +117,8 @@ end
 ;;; Market procedures
 
 to-report overall-sector-demand                         ;; Computes the demand for a whole sector
-  let range-of-variation  (1 - random-float 2)          ;; Range of variation - demand is history dependent
-  let demand map [ (1 + range-of-variation ) * ? ] base-demand
+  let range-of-variation  n-values number-of-sectors [random-normal 1.2 0.5]       ;; Range of variation - demand is history dependent
+  let demand (map [ ?1  * ?2 ] base-demand range-of-variation)
   report demand
 end
 
