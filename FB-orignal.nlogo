@@ -141,7 +141,7 @@ to find-firm
 
   cf:case [ p-of-home-firm <= p-of-other-firm and tech-relatedness?] [
     let other-firms [other firms] of parent-firm
-    let best-firm-match max-one-of other-firms [(weight / product-space-size ) * firm-size] ;;  lottery rnd extension max one of
+    let best-firm-match max-one-of other-firms [weight * firm-size] ;;  lottery rnd extension max one of
     if best-firm-match != nobody [
     create-link-with best-firm-match
     set changed-job-counter changed-job-counter + 1
