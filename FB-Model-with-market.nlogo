@@ -119,7 +119,7 @@ end
 ;;; Market procedures
 
 to-report overall-sector-demand                         ;; Computes the demand for a whole sector
-  let range-of-variation  n-values number-of-sectors [random-normal 2 0.65]       ;; Range of variation - demand is history dependent
+  let range-of-variation  n-values number-of-sectors [random-normal 2 0.6]       ;; Range of variation - demand is history dependent
   let demand (map [ ?1  * ?2 ] base-demand range-of-variation)
   report demand
 end
@@ -154,8 +154,11 @@ end
 to find-firm                                             ;; when each pd is hatched it decides to which firm it is tobe affiliated with
   let p-of-home-firm random 100
 
+  ;let b ( 1 - (distance-to-best-match / 250))
+  ;let c (p-of-home-firm + b)
+
   cf:when
-  cf:case [ p-of-home-firm <= p-of-parent-firm ] [
+  cf:case [ p-of-home-firm <= p-of-parent-firm  ] [
     create-link-with parent-firm
     set counter-parent counter-parent + 1
   ]
@@ -172,7 +175,7 @@ to find-firm                                             ;; when each pd is hatc
   cf:case [ p-of-home-firm <= p-of-other-firm and tech-relatedness?] [
     let other-firms [other firms] of parent-firm
     let best-firm-match min-one-of other-firms [
-      (1 - ( (sum (map [?1 * ?2] t-index ([t-index] of myself))) / product-space-size )) * firm-size]
+      (1 - ( (sum (map [?1 * ?2] t-index ([t-index] of myself))) / diversity )) * firm-size]
     if best-firm-match != nobody [
     create-link-with best-firm-match
     set changed-job-counter changed-job-counter + 1
@@ -212,7 +215,7 @@ to find-city
   cf:case [ p-of-home-city <= p-for-other-city and tech-relatedness? ] [
     let other-cities [other cities] of parent-city
     let best-city-match  max-one-of other-cities [
-      (1 - ( (sum (map [?1 * ?2] t-index ([t-index] of myself))) / product-space-size )) * city-size]
+      (1 - ( (sum (map [?1 * ?2] t-index ([t-index] of myself))) / diversity )) * city-size]
     if best-city-match != nobody [
     create-link-with best-city-match
     set left-city-counter left-city-counter + 1
@@ -289,6 +292,7 @@ end
 to-report diversity
     report length remove-duplicates [t-index] of pd-s
 end
+
 @#$#@#$#@
 GRAPHICS-WINDOW
 282
@@ -343,7 +347,7 @@ initial-cities
 initial-cities
 0
 60
-8
+10
 1
 1
 NIL
@@ -451,7 +455,7 @@ p-for-other-city
 p-for-other-city
 p-for-parent-city + 1
 100
-90
+94
 1
 1
 %
@@ -503,7 +507,7 @@ Product-space-size
 Product-space-size
 0
 8000
-100
+500
 50
 1
 NIL
@@ -548,10 +552,10 @@ PENS
 "default" 1.0 2 -16777216 true "" "if ticks mod 50 = 0 [\n \n clear-plot\n  (foreach (n-values count firms [ 1 + ? ]) (reverse sort [ firm-size ] of firms) [\n    plotxy (log ?1 10) (log ?2 10)\n  ])\n  ]"
 
 PLOT
-906
-63
-1239
-213
+1024
+583
+1564
+893
 PD count
 NIL
 NIL
@@ -564,6 +568,8 @@ false
 "" ""
 PENS
 "default" 1.0 0 -16777216 true "" "plot count pd-s"
+"pen-1" 1.0 0 -13345367 true "" "plot diversity"
+"pen-2" 1.0 0 -2674135 true "" "plot (count pd-s - diversity) * 3.5"
 
 PLOT
 884
@@ -595,15 +601,33 @@ PENS
 "pen-11" 1.0 0 -13740902 true "" "plot count pd-s with [ item 10 t-index = 1 ]"
 
 SWITCH
-1333
-111
-1500
-144
+86
+406
+253
+439
 tech-relatedness?
 tech-relatedness?
 1
 1
 -1000
+
+PLOT
+1240
+59
+1539
+206
+plot 1
+NIL
+NIL
+0.0
+10.0
+0.0
+10.0
+true
+false
+"" ""
+PENS
+"default" 1.0 0 -16777216 true "" "plot (count pd-s - diversity)"
 
 @#$#@#$#@
 ## WHAT IS IT?
