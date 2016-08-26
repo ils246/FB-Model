@@ -107,6 +107,8 @@ to go
   update-positions                                      ;; Re-arranges the layout as new agents are created to fit in the world
   compute-revenue agent-demand sector-agentset
 
+  ;set base-demand overall-sector-demand
+
   ask pd-s   [ if revenue < 0 [die]]
   ask firms  [ if not any? link-neighbors with [ breed = pd-s] [ die ]]   ;; Firms are an aggregation of pd-s, it's impossible to have a firm with no pd-s
   ask cities [ if not any? link-neighbors with [ breed = pd-s] [ die ]]   ;; Cities are an aggregation of pd-s, it's impossible to have a firm with no pd-s
@@ -117,7 +119,7 @@ end
 ;;; Market procedures
 
 to-report overall-sector-demand                         ;; Computes the demand for a whole sector
-  let range-of-variation  n-values number-of-sectors [random-normal 1.2 0.5]       ;; Range of variation - demand is history dependent
+  let range-of-variation  n-values number-of-sectors [random-normal 2 0.65]       ;; Range of variation - demand is history dependent
   let demand (map [ ?1  * ?2 ] base-demand range-of-variation)
   report demand
 end
