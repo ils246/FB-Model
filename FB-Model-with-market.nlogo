@@ -88,7 +88,19 @@ to go
       set parent-city [one-of link-neighbors with [ breed = cities]] of myself
       set parent-firm [one-of link-neighbors with [ breed = firms ]] of myself
       set cost-of-operation random 100
-      set t-index t-index-similar-to-parent-firm [t-index] of myself
+
+      let degrees-of-mutation random 6    ;;-> how much mutation does actualy happen in real- life?
+
+      cf:when
+      cf:case degrees-of-mutation = 0 [set t-index [t-index] of myself
+      cf:case degrees-of-mutation = 1 [set t-index t-index-similar-to-parent-firm-1 [t-index] of myself ]
+      cf:case degrees-of-mutation = 2 [set t-index t-index-similar-to-parent-firm-2 [t-index] of myself ]
+      cf:case degrees-of-mutation = 3 [set t-index t-index-similar-to-parent-firm-3 [t-index] of myself ]
+      cf:case degrees-of-mutation = 4 [set t-index t-index-similar-to-parent-firm-4 [t-index] of myself ]
+
+
+
+      set t-index t-index-similar-to-parent-firm-2 [t-index] of myself
       find-firm
       find-city
     ]
@@ -234,23 +246,37 @@ to find-city
   ]
 end
 
-to-report t-index-similar-to-parent-firm [ parent-t-index ]
-  let first-change replace-item (random length (parent-t-index)) parent-t-index 1
-  report replace-item (random length (first-change)) first-change 0
+to-report t-index-similar-to-parent-firm-1 [ parent-t-index ]
+  report replace-item (random length (parent-t-index)) parent-t-index random 2
 end
 
 to-report t-index-similar-to-parent-firm-2 [ parent-t-index ]
-  let first-change replace-item (random length (parent-t-index)) parent-t-index 1
-  let second-change replace-item (random length (parent-t-index)) parent-t-index 1
-  report replace-item (random length (second-change)) second-change 0
+  let first-change replace-item (random length (parent-t-index)) parent-t-index random 2
+  report replace-item (random length (first-change)) first-change random 2
 end
 
 to-report t-index-similar-to-parent-firm-3 [ parent-t-index ]
-  let first-change replace-item (random length (parent-t-index)) parent-t-index 1
-  let second-change replace-item (random length (parent-t-index)) parent-t-index 1
-  let third-change replace-item (random length (parent-t-index)) parent-t-index 1
-  report replace-item (random length (third-change)) third-change 0
+  let first-change replace-item (random length (parent-t-index)) parent-t-index random 2
+  let second-change replace-item (random length (parent-t-index)) first-change random 2
+  report replace-item (random length (second-change)) second-change random 2
 end
+
+to-report t-index-similar-to-parent-firm-4 [ parent-t-index ]
+  let first-change replace-item (random length (parent-t-index)) parent-t-index random 2
+  let second-change replace-item (random length (parent-t-index)) first-change random 2
+  let third-change replace-item (random length (parent-t-index)) second-change random 2
+  report replace-item (random length (third-change)) third-change random 2
+end
+
+to-report t-index-similar-to-parent-firm-5 [ parent-t-index ]
+  let first-change replace-item (random length (parent-t-index)) parent-t-index random 2
+  let second-change replace-item (random length (parent-t-index)) first-change random 2
+  let third-change replace-item (random length (parent-t-index)) second-change random 2
+  let fourth-change replace-item (random length (third-change)) third-change random 2
+  report fourth-change replace-item (random length (fourth-change)) fourth-change random 2
+end
+
+
 
 
 to-report pd-city
@@ -1116,6 +1142,111 @@ NetLogo 6.0-M6
     </enumeratedValueSet>
     <enumeratedValueSet variable="Product-space-size">
       <value value="100"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="Experiment-2-jumps" repetitions="50" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="4000"/>
+    <metric>ifelse-value (ticks mod 200 = 0) [ count pd-s ] [ "invalid" ]</metric>
+    <metric>ifelse-value (ticks mod 200 = 0) [ count firms ] [ "invalid" ]</metric>
+    <metric>ifelse-value (ticks mod 200 = 0) [ diversity ] [ "invalid" ]</metric>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="500"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-for-other-city">
+      <value value="94"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-for-parent-city">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="true"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="Experiment-3-jumps" repetitions="50" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="4000"/>
+    <metric>ifelse-value (ticks mod 200 = 0) [ count pd-s ] [ "invalid" ]</metric>
+    <metric>ifelse-value (ticks mod 200 = 0) [ count firms ] [ "invalid" ]</metric>
+    <metric>ifelse-value (ticks mod 200 = 0) [ diversity ] [ "invalid" ]</metric>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="500"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-for-other-city">
+      <value value="94"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-for-parent-city">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="true"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="Experiment-4-jumps" repetitions="50" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="4000"/>
+    <metric>ifelse-value (ticks mod 200 = 0) [ count pd-s ] [ "invalid" ]</metric>
+    <metric>ifelse-value (ticks mod 200 = 0) [ count firms ] [ "invalid" ]</metric>
+    <metric>ifelse-value (ticks mod 200 = 0) [ diversity ] [ "invalid" ]</metric>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="500"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-for-other-city">
+      <value value="94"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="5"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-for-parent-city">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="true"/>
     </enumeratedValueSet>
   </experiment>
 </experiments>
