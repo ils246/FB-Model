@@ -32,7 +32,7 @@ pd-s-own    [
 to setup
   ca
   set number-of-sectors 20
-  let resources 50000
+  let resources 10000
   set base-demand n-values number-of-sectors [ (random-float 1 * resources) + 5 ]
 
   create-pd-s initial-pds [                             ;; creates pd-s
@@ -92,13 +92,12 @@ to go
       let degrees-of-mutation random 6    ;;-> how much mutation does actualy happen in real- life?
 
       cf:when
-      cf:case degrees-of-mutation = 0 [set t-index [t-index] of myself
-      cf:case degrees-of-mutation = 1 [set t-index t-index-similar-to-parent-firm-1 [t-index] of myself ]
-      cf:case degrees-of-mutation = 2 [set t-index t-index-similar-to-parent-firm-2 [t-index] of myself ]
-      cf:case degrees-of-mutation = 3 [set t-index t-index-similar-to-parent-firm-3 [t-index] of myself ]
-      cf:case degrees-of-mutation = 4 [set t-index t-index-similar-to-parent-firm-4 [t-index] of myself ]
-
-
+      cf:case [degrees-of-mutation = 0] [set t-index [t-index] of myself]
+      cf:case [degrees-of-mutation = 1] [set t-index t-index-similar-to-parent-firm-1 [t-index] of myself ]
+      cf:case [degrees-of-mutation = 2] [set t-index t-index-similar-to-parent-firm-2 [t-index] of myself ]
+      cf:case [degrees-of-mutation = 3] [set t-index t-index-similar-to-parent-firm-3 [t-index] of myself ]
+      cf:case [degrees-of-mutation = 4] [set t-index t-index-similar-to-parent-firm-4 [t-index] of myself ]
+      cf:else [ set t-index t-index-similar-to-parent-firm-5 [t-index] of myself ]
 
       set t-index t-index-similar-to-parent-firm-2 [t-index] of myself
       find-firm
@@ -119,14 +118,14 @@ to go
   update-positions                                      ;; Re-arranges the layout as new agents are created to fit in the world
   compute-revenue agent-demand sector-agentset
 
-  ;set base-demand overall-sector-demand
-
   ask pd-s   [ if revenue < 0 [die]]
   ask firms  [ if not any? link-neighbors with [ breed = pd-s] [ die ]]   ;; Firms are an aggregation of pd-s, it's impossible to have a firm with no pd-s
   ask cities [ if not any? link-neighbors with [ breed = pd-s] [ die ]]   ;; Cities are an aggregation of pd-s, it's impossible to have a firm with no pd-s
   ;if (ticks mod 5 = 0) [print (count pd-s - diversity) ]
 
-  if ticks > 4000 [stop]
+  ;set base-demand overall-sector-demand ;; I started witn 10000 for resources instead 50000 and it tells me that math operation produced a number too large for netlogo, plus it never crashes
+  let x n-values number-of-sectors [ 2 + random 50 ]
+  set base-demand (map [?1 + ?2] base-demand x)
   tick
 end
 
@@ -273,7 +272,7 @@ to-report t-index-similar-to-parent-firm-5 [ parent-t-index ]
   let second-change replace-item (random length (parent-t-index)) first-change random 2
   let third-change replace-item (random length (parent-t-index)) second-change random 2
   let fourth-change replace-item (random length (third-change)) third-change random 2
-  report fourth-change replace-item (random length (fourth-change)) fourth-change random 2
+  report replace-item (random length (fourth-change)) fourth-change random 2
 end
 
 
@@ -633,7 +632,6 @@ false
 PENS
 "default" 1.0 0 -16777216 true "" "plot count pd-s"
 "pen-1" 1.0 0 -13345367 true "" "plot diversity"
-"pen-2" 1.0 0 -2674135 true "" "plot (count pd-s - diversity) * 3.5"
 
 PLOT
 884
