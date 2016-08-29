@@ -112,6 +112,9 @@ to go
   ask pd-s   [ if revenue < 0 [die]]
   ask firms  [ if not any? link-neighbors with [ breed = pd-s] [ die ]]   ;; Firms are an aggregation of pd-s, it's impossible to have a firm with no pd-s
   ask cities [ if not any? link-neighbors with [ breed = pd-s] [ die ]]   ;; Cities are an aggregation of pd-s, it's impossible to have a firm with no pd-s
+  ;if (ticks mod 5 = 0) [print (count pd-s - diversity) ]
+
+  if ticks > 4000 [stop]
   tick
 end
 
@@ -119,7 +122,7 @@ end
 ;;; Market procedures
 
 to-report overall-sector-demand                         ;; Computes the demand for a whole sector
-  let range-of-variation  n-values number-of-sectors [random-normal 2 0.6]       ;; Range of variation - demand is history dependent
+  let range-of-variation  n-values number-of-sectors [random-normal 2 0.62]       ;; Range of variation - demand is history dependent
   let demand (map [ ?1  * ?2 ] base-demand range-of-variation)
   report demand
 end
@@ -154,11 +157,11 @@ end
 to find-firm                                             ;; when each pd is hatched it decides to which firm it is tobe affiliated with
   let p-of-home-firm random 100
 
-  ;let b ( 1 - (distance-to-best-match / 250))
-  ;let c (p-of-home-firm + b)
+  let b ( 1 - (distance-to-best-match / diversity))  ;; if I use diversity instead of 250 would the answer be approximate? - good enough... because apparently you can have algortihtms to compute the best distance between two vectors but they are nlogn
+  let c (p-of-home-firm + b)
 
   cf:when
-  cf:case [ p-of-home-firm <= p-of-parent-firm  ] [
+  cf:case [ c <= p-of-parent-firm  ] [
     create-link-with parent-firm
     set counter-parent counter-parent + 1
   ]
@@ -236,6 +239,20 @@ to-report t-index-similar-to-parent-firm [ parent-t-index ]
   report replace-item (random length (first-change)) first-change 0
 end
 
+to-report t-index-similar-to-parent-firm-2 [ parent-t-index ]
+  let first-change replace-item (random length (parent-t-index)) parent-t-index 1
+  let second-change replace-item (random length (parent-t-index)) parent-t-index 1
+  report replace-item (random length (second-change)) second-change 0
+end
+
+to-report t-index-similar-to-parent-firm-3 [ parent-t-index ]
+  let first-change replace-item (random length (parent-t-index)) parent-t-index 1
+  let second-change replace-item (random length (parent-t-index)) parent-t-index 1
+  let third-change replace-item (random length (parent-t-index)) parent-t-index 1
+  report replace-item (random length (third-change)) third-change 0
+end
+
+
 to-report pd-city
   report one-of link-neighbors with [ breed = cities ]
 end
@@ -293,6 +310,27 @@ to-report diversity
     report length remove-duplicates [t-index] of pd-s
 end
 
+to-report max-list-distance
+  let a n-values number-of-sectors [0]
+  let b n-values number-of-sectors [1]
+  report list-distance a b
+end
+
+to-report list-distance [a b]
+report sqrt (sum (map [ (?1 - ?2) ^ 2 ] a b))
+end
+
+to-report distance-to-best-match
+  let my-t t-index
+  report min ([list-distance my-t t-index] of other firms)
+end
+
+to-report unique-and-all-count-pairs
+  report map [
+    (list (length remove-duplicates ([t-index] of [link-neighbors] of ?))
+          (length                   ([t-index] of [link-neighbors] of ?)))
+  ] ([self] of cities with [ count link-neighbors > 6 ])
+end
 @#$#@#$#@
 GRAPHICS-WINDOW
 282
@@ -607,7 +645,7 @@ SWITCH
 439
 tech-relatedness?
 tech-relatedness?
-1
+0
 1
 -1000
 
