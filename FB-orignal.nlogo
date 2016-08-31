@@ -59,6 +59,8 @@ to setup
     set city-size count [my-links] of self
   ]
 
+  ;;ask pd-s [if other pd-s with [t-index] = [t-index] of self [ set t-index random product-space-size ]] Check bug for repetition at setup.
+
   ask patch -15 100 [ set plabel "Cities"]
   ask patch 0 100   [ set plabel "PDs"]
   ask patch 15 100  [ set plabel "Firms"]
@@ -286,7 +288,7 @@ initial-cities
 initial-cities
 0
 60
-10
+28
 1
 1
 NIL
@@ -301,7 +303,7 @@ initial-pds
 initial-pds
 0
 60
-10
+28
 1
 1
 NIL
@@ -316,7 +318,7 @@ initial-firms
 initial-firms
 0
 100
-5
+27
 1
 1
 NIL
