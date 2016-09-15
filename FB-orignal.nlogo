@@ -883,6 +883,428 @@ NetLogo 6.0-M6
 @#$#@#$#@
 @#$#@#$#@
 @#$#@#$#@
+<experiments>
+  <experiment name="FB-Original-Small-size-Scenario-1-Tech-off" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="96"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="96"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Small-size-Scenario-1-Tech-on" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="96"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="96"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="10"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-1-Tech-on" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="96"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="96"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-1-Tech-off" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="50"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="96"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="96"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-2-Tech-off" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="95"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="95"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-2-Tech-on" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="60"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="95"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="95"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-3-Tech-off" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="70"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="70"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="93.3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="93.3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-3-Tech-on" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="70"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="70"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="93.3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="93.3"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-4-Tech-on" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-4-Tech-off" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-5-Tech-off" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="false"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+  <experiment name="FB-Original-Large-size-Scenario-5-Tech-on" repetitions="100" runMetricsEveryStep="true">
+    <setup>setup</setup>
+    <go>go</go>
+    <timeLimit steps="5000"/>
+    <enumeratedValueSet variable="p-of-parent-city">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="Product-space-size">
+      <value value="10000"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-parent-firm">
+      <value value="90"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-cities">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-pds">
+      <value value="200"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="tech-relatedness?">
+      <value value="true"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-firm">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-other-city">
+      <value value="80"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="initial-firms">
+      <value value="100"/>
+    </enumeratedValueSet>
+    <enumeratedValueSet variable="p-of-radical-innovation">
+      <value value="80"/>
+    </enumeratedValueSet>
+  </experiment>
+</experiments>
 @#$#@#$#@
 @#$#@#$#@
 default
