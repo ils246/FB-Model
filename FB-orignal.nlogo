@@ -15,12 +15,13 @@ breed [ pd-s a-pd  ]       ;; pd-s stands for Product Divisions
 breed [ firms firm ]
 breed [ cities city ]
 
-turtles-own [ t-index ]
+
 firms-own   [ firm-size parent ]
 cities-own  [ city-size ]
 pd-s-own    [
   parent-firm
   parent-city
+  t-index
 ]
 
 
@@ -51,13 +52,11 @@ to setup
 
   ask firms [
     if count my-links = 0 [die]        ;; firms are an aggregation of pd-s, it's impossible to have a firm with no pd-s
-    set-t-index
     set firm-size count [my-links] of self
   ]
 
   ask cities [
     if count my-links = 0 [die]        ;; cities are an aggregation of pd-s, it's impossible to have a city with no pd-s
-    set-t-index
     set city-size count [my-links] of self
   ]
 
@@ -79,7 +78,7 @@ to go
 
       set parent-city [one-of link-neighbors with [ breed = cities]] of myself
       set parent-firm [one-of link-neighbors with [ breed = firms]] of myself
-      set t-index ((random-normal [t-index] of parent-firm p-of-radical-innovation) mod product-space-size) ;; I would have to change it here too
+      set t-index ((random-normal [t-index] of myself p-of-radical-innovation) mod product-space-size)
 
       find-firm
       find-city
@@ -88,12 +87,10 @@ to go
 
    ask firms [                              ;; Firms update their link count - size
      set firm-size count [my-links] of self
-     set-t-index
    ]
 
    ask cities [                             ;; Cities update their link count - size
      set city-size count [my-links] of self
-     set-t-index
    ]
 
  ]
@@ -139,6 +136,7 @@ to find-firm
   let b ( 1 - (distance-to-best-match / 250))
   let c (p-of-home-firm + b) ;; some will be > than 1 but do I have to normalize it if p-of-parent-city will be max 1 or 0.9
 
+  let focal-pd self
   cf:when
   cf:case [ c <= p-of-parent-firm ] [
     create-link-with parent-firm
@@ -147,7 +145,7 @@ to find-firm
 
   cf:case [ p-of-home-firm <= p-of-other-firm ] [
     let other-firms [other firms] of parent-firm
-    let best-firm-match max-one-of other-firms [(ifelse-value (tech-relatedness?) [distance-to-best-match] [1]) * firm-size]
+    let best-firm-match max-one-of other-firms [(ifelse-value (tech-relatedness?) [ firm-size / [ distance-to myself ] of focal-pd] [firm-size])]
     if best-firm-match != nobody [
     create-link-with best-firm-match
     set changed-job-counter changed-job-counter + 1
@@ -160,7 +158,6 @@ to find-firm
     create-link-with parent-of-firm
     set startup-counter startup-counter + 1
     setup-new-firm
-    set-t-index
     ]
   ]
 end
@@ -171,6 +168,7 @@ to find-city
   let p-of-home-city random 100
   let p ( 1 - (distance-to-best-match / 250))
   let a (p-of-home-city + p) ;; some will be > than 1 but do I have to normalize it if p-of-parent-city will be max 1 or 0.9
+  let focal-pd self
 
   cf:when
   cf:case [ a <= p-of-parent-city ] [
@@ -180,7 +178,7 @@ to find-city
 
   cf:case [ p-of-home-city <= p-of-other-city ] [
     let other-cities [other cities] of parent-city
-    let best-city-match max-one-of other-cities [(ifelse-value (tech-relatedness?) [distance-to-best-match] [1]) * city-size] ;min-one-of other-cities [(1 - (distance-to-best-match / p-of-radical-innovation )) * city-size] ;
+    let best-city-match max-one-of other-cities [(ifelse-value (tech-relatedness?) [ city-size / [ distance-to myself ] of focal-pd] [city-size])]
     if best-city-match != nobody [
     create-link-with best-city-match
     set left-city-counter left-city-counter + 1
@@ -192,14 +190,11 @@ to find-city
     create-link-with parent-of-city
     set newcity-counter newcity-counter + 1
     setup-new-city
-    set-t-index]
+    ]
   ]
 
 end
 
-to set-t-index
-  set t-index mean [t-index] of link-neighbors with [ breed = pd-s]
-end
 
 to arrange-in-column [ agentset x ] ; give argument agent set firms and x is the xcor
   ask agentset [ setxy x max-pycor - 2]
@@ -225,17 +220,17 @@ end
 ;  * add p (which will be optimal when the comparer's t-index is high and the comparee's t-index is low)
 
 
-
-to-report distance-to-best-match
- report min map [ abs (t-index - ([t-index] of myself + ? )) ]  (list 0 (- product-space-size) product-space-size)
-
-
-
-
-
-
- ;;1 - distance-to-best-match + p  or 1 - distance-to-best-match * p6
+to-report distance-to-pd [ prod-div ]
+  report min map [ abs (t-index - ([t-index] of prod-div + ? )) ]  (list 0 (- product-space-size) product-space-size)
 end
+
+to-report distance-to [ firm-or-city ]
+  let focal-pd self
+  report mean [ [ distance-to-pd focal-pd ] of link-neighbors with [ breed = pd-s] ] of firm-or-city ;;
+end
+
+
+
 @#$#@#$#@
 GRAPHICS-WINDOW
 255
