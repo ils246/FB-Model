@@ -31,6 +31,8 @@ to setup
     setup-new-pd
     set t-index random product-space-size
   ]
+  ask pd-s [
+    while [any? other pd-s with [ t-index = [t-index] of myself]] [ set t-index random product-space-size ] ]
 
   create-firms initial-firms [         ;; creates firms
     setup-new-firm
