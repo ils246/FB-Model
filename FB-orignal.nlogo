@@ -131,14 +131,13 @@ to setup-new-city
 
 end
 
-to find-firm
+to find-firm ;; need to change this because I'm taking into account technolgical distance even when tech relatedness is off!!
   let p-of-home-firm random 100
-  let b ( 1 - (distance-to-best-match / 250))
-  let c (p-of-home-firm + b) ;; some will be > than 1 but do I have to normalize it if p-of-parent-city will be max 1 or 0.9
+  let b ifelse-value (tech-relatedness?) [p-of-home-firm + ( 1 - (distance-to parent-firm / (product-space-size * 0.5)))] [p-of-home-firm] ;; some will be > than 1 but do I have to normalize it if p-of-parent-city will be max 1 or 0.9
 
   let focal-pd self
   cf:when
-  cf:case [ c <= p-of-parent-firm ] [
+  cf:case [ b <= p-of-parent-firm ] [
     create-link-with parent-firm
     set counter-parent counter-parent + 1
   ]
@@ -166,12 +165,12 @@ end
 to find-city
 
   let p-of-home-city random 100
-  let p ( 1 - (distance-to-best-match / 250))
-  let a (p-of-home-city + p) ;; some will be > than 1 but do I have to normalize it if p-of-parent-city will be max 1 or 0.9
+  let b ifelse-value (tech-relatedness?) [p-of-home-city + ( 1 - (distance-to parent-city / (product-space-size * 0.5)))] [p-of-home-city]
+
   let focal-pd self
 
   cf:when
-  cf:case [ a <= p-of-parent-city ] [
+  cf:case [ b <= p-of-parent-city ] [
     create-link-with parent-city
     set counter-parent-city counter-parent-city + 1
   ]
