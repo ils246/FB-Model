@@ -281,8 +281,8 @@ SLIDER
 initial-cities
 initial-cities
 0
-60
 28
+100
 1
 1
 NIL
@@ -296,8 +296,8 @@ SLIDER
 initial-pds
 initial-pds
 0
-60
 28
+100
 1
 1
 NIL
